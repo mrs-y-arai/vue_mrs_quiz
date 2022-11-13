@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["http://localhost:8080","https://mrs-quiz-b84d3.web.app"],
+      "responseHeader": ["*"],
+      "method": ["GET"],
+      "maxAgeSeconds": 86400
+    }
+]

@@ -1,0 +1,32 @@
+.DS_Store
+node_modules
+/public
+package-lock.json
+google-cloud-cli-406.0.0-darwin-x86_64.tar.gz
+.github
+/google-cloud-sdk
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Confidential information
+.firebase/
+.firebaserc
+./src/firebase/
+mrs-quiz-b84d3-firebase-adminsdk-z0yvk-8b8d71a991.json

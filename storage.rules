@@ -1,0 +1,24 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+  	// 容量制限（Kb）
+    function maxKB(kb) {
+      return request.resource.size < kb * 1024;
+    }
+    
+    match /user/{userId}/{allPaths=**} {
+      allow read: if request.auth != null
+      						&& request.auth.uid == userId;
+      allow create: if request.auth != null
+      						  && request.auth.uid == userId
+      						  && request.resource.contentType.matches('image/.*')
+      						  && maxKB(5000);
+      allow update: if request.auth != null
+      						  && request.auth.uid == userId
+                    && request.resource.contentType.matches('image/.*')
+                    && maxKB(5000);
+      allow delete: if request.auth != null
+      						  && request.auth.uid == userId;
+    }
+  }
+}

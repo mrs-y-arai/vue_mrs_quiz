@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {    
+    // 認証できたユーザーなら、songsのデータを取得できる。書き込み・更新・削除はできない。
+    match /songs/{document} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    
+    // accounts_best_scoreに入るデータの制限
+    function isAccountsBestScoreData(data) {
+    	return data.keys().hasOnly(['name', 'bestScore', 'userId'])
+			&& data.name is string
+      && data.bestScore is number
+      && data.userId is string;
+    }
+    
+    // 認証できたユーザーなら、accounts_best_scoreのデータを取得できる。
+    // 認証できたユーザーで、決まったデータの項目・型であれば、書き込み・更新・削除もできる。
+    match /accounts_best_score/{document} {
+      allow read: if request.auth != null;
+      allow create: if isAccountsBestScoreData(request.resource.data)
+      						  && request.auth != null;
+      allow update: if isAccountsBestScoreData(request.resource.data)
+      						  && request.auth != null;
+      allow delete: if request.auth != null;
+    }
+  }
+}
