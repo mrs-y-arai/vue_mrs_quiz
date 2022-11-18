@@ -1,5 +1,8 @@
 # vue_mrs_quiz
 
+## Overview
+Vue CLIで作成した、クイズアプリです。
+
 ## Project setup
 ```
 npm install
